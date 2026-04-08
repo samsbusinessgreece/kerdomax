@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>KERDOMAX — Greek Short-Term Rental Optimization</title>
+  <meta name="description" content="AI-powered dynamic pricing, listing optimization, and guest messaging for Greek hosts." />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --blue: #1A2E4C;      /* Slate Blue */
+      --beige: #EDE7DD;     /* Warm Beige */
+      --bg: #ffffff;
+      --text: #1a1a1a;
+    }
+    * {box-sizing: border-box;}
+    html, body {margin: 0; padding: 0; background: var(--bg); color: var(--text); font-family: 'Montserrat', system-ui, Arial, sans-serif;}
+    a {color: var(--blue); text-decoration: none;}
+    header {padding: 32px 20px; text-align: center;}
+    .brand {display: inline-flex; align-items: center; gap: 12px; justify-content: center;}
+    .brand .k {font-weight: 800; font-size: 34px; color: var(--blue); letter-spacing: .5px;}
+    .brand .name {font-weight: 800; font-size: 28px; color: var(--blue);}
+    .hero {padding: 48px 20px; text-align: center; background: #f7f7f7;}
+    .hero h1 {margin: 0 0 12px; font-size: 2.6rem; letter-spacing: .5px;}
+    .hero p {margin: 0 auto 24px; max-width: 700px; color: #444; font-size: 1.05rem;}
+    .cta {display: inline-block; padding: 14px 26px; background: var(--blue); color: white; border-radius: 26px; font-weight: 700;}
+    .section {padding: 48px 20px;}
+    .grid {display: grid; gap: 20px; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));}
+    .card {border: 1px solid #eee; padding: 20px; border-radius: 12px; background: #fff;}
+    .card h3 {margin-top: 0;}
+    .mini {font-size: .92rem; color: #555;}
+    form {max-width: 700px; margin: 0 auto;}
+    label {display: block; margin: 12px 0 6px; font-weight: 600;}
+    input[type="text"], input[type="email"], textarea, select {
+      width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px; font-size: 1rem;
+    }
+    .row {display: grid; grid-template-columns: 1fr 1fr; gap: 12px;}
+    .footer {padding: 40px 20px; text-align: center; color: #666; font-size: .92rem;}
+    @media (max-width: 600px){
+      .hero h1 {font-size: 2rem;}
+      .row {grid-template-columns: 1fr;}
+    }
+    /* Netlify honeypot (hidden field) */
+    .hidden {display: none;}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="brand" aria-label="KERDOMAX branding">
+      <div class="k" aria-label="K monogram">K</div>
+      <div class="name" aria-label="KERDOMAX wordmark">KERDOMAX</div>
+    </div>
+  </header>
+
+  <section class="hero" aria-label="Hero">
+    <h1>KERDOMAX — Greek Short-Term Rental Optimization</h1>
+    <p>AI-powered dynamic pricing, optimized listings, and smart guest messaging designed for Greek hosts. Increase occupancy, improve revenue, and simplify operations.</p>
+    <a class="cta" href="#signup">Get Early Access</a>
+  </section>
+
+  <section class="section" aria-label="Why KERDOMAX">
+    <div class="grid">
+      <div class="card">
+        <h3>Dynamic Pricing for Greece</h3>
+        <p class="mini">Local demand signals, events, seasonality, and competitive pricing baked in.</p>
+      </div>
+      <div class="card">
+        <h3>Listing Optimization</h3>
+        <p class="mini">AI-generated, localized titles and descriptions to attract more bookings.</p>
+      </div>
+      <div class="card">
+        <h3>Smart Guest Messaging</h3>
+        <p class="mini">Automated, personalized messages with multilingual support.</p>
+      </div>
+      <div class="card">
+        <h3>Owned by Greek Hosts</h3>
+        <p class="mini">Greek-first UX, templates, and local support to simplify adoption.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" aria-label="MVP & Sign-up" id="signup">
+    <h2 style="text-align:center; margin-bottom:8px;">Join the Beta / Get Early Access</h2>
+    <p style="text-align:center; color:#555; margin-top:0 0 20px 0;">Be among the first to try KERDOMAX. Sign up to receive beta invites and early access updates.</p>
+
+    <form name="kerdomax-signup" method="POST" data-netlify="true" data-netlify-honeypot="bot-field" action="/thank-you">
+      <input type="hidden" name="form-name" value="kerdomax-signup" />
+      <p class="hidden">
+        <label>Don’t fill this out if you're human: <input name="bot-field" /></label>
+      </p>
+
+      <div class="row">
+        <div>
+          <label for="name">Όνομα</label>
+          <input type="text" id="name" name="name" placeholder="Π.χ. Γιάννης" required />
+        </div>
+        <div>
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" placeholder="you@example.com" required />
+        </div>
+      </div>
+
+      <div class="row" style="margin-top:12px;">
+        <div>
+          <label for="properties">Αριθμός Καταλυμάτων</label>
+          <select id="properties" name="properties" required>
+            <option value="" disabled selected>Επιλέξτε</option>
+            <option>1–2</option>
+            <option>3–10</option>
+            <option>10+</option>
+          </select>
+        </div>
+        <div>
+          <label for="city">Πόλη / Περιφέρεια</label>
+          <input type="text" id="city" name="city" placeholder="Αθήνα, Θεσσαλονίκη, Κρήτη..." />
+        </div>
+      </div>
+
+      <div style="margin-top:12px;">
+        <label for="notes">Σχόλιο (προαιρετικό)</label>
+        <textarea id="notes" name="notes" rows="4" placeholder="Πείτε μας περισσότερα..." ></textarea>
+      </div>
+
+      <button type="submit" class="cta" style="margin-top:16px;">Εγγραφή / Get Beta Access</button>
+    </form>
+
+    <p class="mini" style="text-align:center; margin-top:12px;">
+      By signing up you agree to receive product updates and beta invitations. Your data will be handled in accordance with our privacy policy.
+    </p>
+  </section>
+
+  <footer class="footer" aria-label="Footer">
+    <p>© 2026 KERDOMAX. All rights reserved. Privacy policy • Terms</p>
+  </footer>
+
+  <!-- Optional: simple client-side success message (if not using Netlify thank-you page) -->
+  <script>
+    // Lightweight handler for non-Netlify environments
+    (function(){
+      if (window.location.pathname === '/thank-you') {
+        document.body.innerHTML = '<section class="section" style="text-align:center;"><h2>Thank you for joining KERDOMAX beta!</h2><p>We will be in touch with details soon.</p></section>';
+      }
+    })();
+  </script>
+</body>
+</html>
