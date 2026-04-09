@@ -1,54 +1,55 @@
-Name: Deploy to Vercel
+name: Deploy to Vercel
 
 on:
-push:
-branches:
-- main
+  push:
+    branches:
+      - main
 
 jobs:
-deploy:
-runs-on: ubuntu-latest
-steps:
-- name: Checkout
-uses: actions/checkout@v4
-- name: Set up Node.js
-    uses: actions/setup-node@v4
-    with:
-      node-version: '18'
+  deploy:
+    runs-on: ubuntu-latest
 
-  - name: Install and Build
-    run: |
-      cd kerdomax-site
-      npm ci
-      npm run build
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
 
-  - name: Deploy to Vercel
-    uses: vercel/action@v2
-    with:
-      vercel-token: ${{ secrets.VERCEL_TOKEN }}
-      vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
-      vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
-      vercel-args: --prod
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
 
-  - name: Health Check
-    run: |
-      URLS=("https://kerdomax.com" "https://www.kerdomax.com")
-      for url in "${URLS[@]}"; do
-        echo "Checking $url"
-        code=$(curl -s -o /dev/null -w "%{http_code}" "$url")
-        if [ "$code" -eq 200 ]; then
-          echo "OK: $url (HTTP $code)"
-        else
-          echo "ERROR: $url returned HTTP $code"
-          exit 1
-        fi
-      done
+      - name: Install and Build
+        run: |
+          cd kerdomax-site
+          npm ci
+          npm run build
 
-      # Optional content check
-      main=$(curl -s https://kerdomax.com | head -n 20)
-      if echo "$main" | grep -iq "KERDOMAX"; then
-        echo "Content check passed for kerdomax homepage"
-      else
-        echo "Content check FAILED: branding text not found"
-        exit 1
-      fi
+      - name: Deploy to Vercel
+        uses: vercel/action@v2
+        with:
+          vercel-token: ${{ secrets.VERCEL_TOKEN }}
+          vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
+          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
+          vercel-args: --prod
+
+      - name: Health Check
+        run: |
+          URLS=("https://kerdomax.com" "https://www.kerdomax.com")
+          for url in "${URLS[@]}"; do
+            echo "Checking $url"
+            code=$(curl -s -o /dev/null -w "%{http_code}" "$url")
+            if [ "$code" -eq 200 ]; then
+              echo "OK: $url (HTTP $code)"
+            else
+              echo "ERROR: $url returned HTTP $code"
+              exit 1
+            fi
+          done
+
+          main=$(curl -s https://kerdomax.com | head -n 20)
+          if echo "$main" | grep -iq "KERDOMAX"; then
+            echo "Content check passed for kerdomax homepage"
+          else
+            echo "Content check FAILED: branding text not found"
+            exit 1
+          fi
